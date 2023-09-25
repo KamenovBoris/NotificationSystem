@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Notification System</title>
+</head>
+<style>
+  .flex-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+  
+  .flex-container > div {
+    background-color: #f1f1f1;
+    margin: 10px;
+    width: 300px;
+    text-align: center;
+  }
+  .btn{
+    margin-top:10px;
+    width: 140px;
+    font-size: 1em;
+  }
+  label{
+    display: inline-block;
+    width: 150px;
+  }
+  </style>
+<body>
+  <div class="flex-container">
+    <h4>Email</h4>
+    <form action="/api/notify/email" method="post">
+        <div>
+          <label for="title">Title</label>
+          <input id="title" type="text" name="Title">
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input id="email" type="email" name="Email">
+        </div>
+        <div>
+          <label for="message">Message</label>
+          <textarea id="message" name="Message"></textarea>
+        </div>
+      <input class="btn" type="submit" value="Send Email" />
+    </form>
+    <hr/>
+  </div>
+  <div class="flex-container">
+      <h4>Sms</h4>
+      <form action="/api/notify/sms" method="post">
+        <div>
+          <label for="phoneNumber">Phone Number</label>
+          <input id="phoneNumber" type="text" name="PhoneNumber">
+        </div>
+        <div>
+          <label for="message">Message</label>
+          <textarea id="message" name="Message"></textarea>
+        </div>
+      <input class="btn" type="submit" value="Send Sms" />
+    </form>
+    <hr/>
+  </div>
+  <div class="flex-container">
+    <h4>Slack</h4>
+    <form action="/api/notify/slack" method="post">
+      <div>
+        <label for="recipient">Recipient</label>
+        <input id="recipient" type="text" name="Recipient">
+      </div>
+      <div>
+        <label for="message">Message</label>
+        <textarea id="message" name="Message"></textarea>
+      </div>
+    <input class="btn" type="submit" value="Send Slack IM" />
+  </form>
+  <hr/>
+</div>
+</body>
+
+</html>
