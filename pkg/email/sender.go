@@ -1,7 +1,7 @@
 package email
 
 import (
-	"notsys/pkg/common"
+	commonSender "notsys/pkg/common-sender"
 
 	"github.com/IBM/sarama"
 )
@@ -19,7 +19,7 @@ func (h EmailMessageSender) Cleanup(session sarama.ConsumerGroupSession) error {
 func (h EmailMessageSender) ConsumeClaim(session sarama.ConsumerGroupSession, claim sarama.ConsumerGroupClaim) error {
 	for msg := range claim.Messages() {
 		var emailNotifier EmailNotification
-		common.SendMessage(*msg, session, &emailNotifier)
+		commonSender.SendMessage(*msg, session, &emailNotifier)
 	}
 	return nil
 }

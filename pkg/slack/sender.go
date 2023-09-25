@@ -1,7 +1,7 @@
 package slack
 
 import (
-	"notsys/pkg/common"
+	commonSender "notsys/pkg/common-sender"
 
 	"github.com/IBM/sarama"
 )
@@ -19,7 +19,7 @@ func (h SlackMessageSender) Cleanup(session sarama.ConsumerGroupSession) error {
 func (h SlackMessageSender) ConsumeClaim(session sarama.ConsumerGroupSession, claim sarama.ConsumerGroupClaim) error {
 	for msg := range claim.Messages() {
 		var slackNotifier SlackNotification
-		common.SendMessage(*msg, session, &slackNotifier)
+		commonSender.SendMessage(*msg, session, &slackNotifier)
 	}
 	return nil
 }

@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
-	consumer "notsys/pkg/common"
+	"notsys/pkg/common"
+	consumer "notsys/pkg/common-sender"
 	"notsys/pkg/slack"
 )
 
 func main() {
 	fmt.Printf("Slack sender service started\n")
-	consumer.RunConsumerGroup([]string{"localhost:9092"}, "slack-consumer-group", []string{"slack"}, slack.SlackMessageSender{})
+	consumer.RunConsumerGroup([]string{common.KafkaUrl}, common.ConsumerGroupSlack, []string{common.ChannelSlack}, slack.SlackMessageSender{})
 }

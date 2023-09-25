@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
-	consumer "notsys/pkg/common"
+	"notsys/pkg/common"
+	consumer "notsys/pkg/common-sender"
 	"notsys/pkg/email"
 )
 
 func main() {
 	fmt.Printf("Email sender service started\n")
-	consumer.RunConsumerGroup([]string{"localhost:9092"}, "email-consumer-group", []string{"email"}, email.EmailMessageSender{})
+	consumer.RunConsumerGroup([]string{common.KafkaUrl}, common.ConsumerGroupEmail, []string{common.ChannelEmail}, email.EmailMessageSender{})
 }

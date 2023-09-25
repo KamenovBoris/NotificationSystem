@@ -1,7 +1,7 @@
 package sms
 
 import (
-	"notsys/pkg/common"
+	commonSender "notsys/pkg/common-sender"
 
 	"github.com/IBM/sarama"
 )
@@ -19,7 +19,7 @@ func (h SmsMessageSender) Cleanup(session sarama.ConsumerGroupSession) error {
 func (h SmsMessageSender) ConsumeClaim(session sarama.ConsumerGroupSession, claim sarama.ConsumerGroupClaim) error {
 	for msg := range claim.Messages() {
 		var smsNotifier SmsNotification
-		common.SendMessage(*msg, session, &smsNotifier)
+		commonSender.SendMessage(*msg, session, &smsNotifier)
 	}
 	return nil
 }

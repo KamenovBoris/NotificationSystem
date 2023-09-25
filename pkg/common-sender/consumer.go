@@ -1,4 +1,4 @@
-package common
+package commonSender
 
 import (
 	"context"
@@ -21,13 +21,13 @@ func RunConsumerGroup(brokers []string, group string, topics []string, sender Me
 
 	consumer, err := sarama.NewConsumerGroup(brokers, group, config)
 	if err != nil {
-		log.Fatalf("Error creating Kafka consumer group: %v", err)
+		log.Printf("Error creating Kafka consumer group: %v", err)
 	}
 	defer consumer.Close()
 
 	for {
 		if err := consumer.Consume(context.Background(), topics, sender); err != nil {
-			log.Fatalf("Error consuming messages: %v", err)
+			log.Printf("Error consuming messages: %v", err)
 		}
 	}
 }

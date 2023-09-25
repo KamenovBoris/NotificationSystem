@@ -1,4 +1,4 @@
-package common
+package commonSender
 
 import (
 	"encoding/json"
@@ -13,7 +13,7 @@ type Notifier interface {
 
 func SendMessage[T Notifier](msg sarama.ConsumerMessage, session sarama.ConsumerGroupSession, notifier T) {
 	if err := json.Unmarshal(msg.Value, &notifier); err != nil {
-		log.Fatalf("Error unmarshaling notification JSON: %v", err)
+		log.Printf("Error unmarshaling notification JSON: %v", err)
 	} else {
 		notifier.Send()
 		session.MarkMessage(&msg, "")

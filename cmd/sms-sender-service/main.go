@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
-	consumer "notsys/pkg/common"
+	"notsys/pkg/common"
+	consumer "notsys/pkg/common-sender"
 	"notsys/pkg/sms"
 )
 
 func main() {
 	fmt.Printf("Sms sender service started\n")
-	consumer.RunConsumerGroup([]string{"localhost:9092"}, "sms-consumer-group", []string{"sms"}, sms.SmsMessageSender{})
+	consumer.RunConsumerGroup([]string{common.KafkaUrl}, common.ConsumerGroupSms, []string{common.ChannelSms}, sms.SmsMessageSender{})
 }
